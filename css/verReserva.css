@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #262626; /* Gris muy oscuro */
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #B87333; /* Cobre */
+    color: white;
+}
+
+td {
+    background-color: #333333; /* Gris oscuro */
+    color: white;
+}
+
+tr:nth-child(even) td {
+    background-color: #444444; /* Gris medio */
+}
+
+h1 {
+    color: #B87333; /* Cobre */
+    text-decoration: underline;
+}
+
+.boton {
+    display: inline-block;
+    background-color: #333333; /* Gris oscuro */
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+    background-color: #B87333; /* Cobre */
+}
+
+/* Centrar la columna de "Acciones" en el encabezado de la tabla */
+#acciones {
+    text-align: center;
+}
+
+/* Centrar el contenido de las celdas de la columna "Acciones" */
+#cuerpo-tabla td:last-child {
+    text-align: center;
+}
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/registroUsuario.css">
+    <title>Registro de Usuario</title>
+</head>
+
+<body>
+    <a href="./index.html" class="boton-volver">Volver al Inicio</a>
+
+    <div class="click-cursor" id="cursor-cambia"></div>
+
+    <div class="contenedor">
+        <div class="tarjeta">
+            <h2 >Registro</h2>
+            <form id="formulario-registro">
+                <label class="palabra-label" for="nombre-completo-registro">Nombre Completo</label>
+                <input type="text" id="nombre-completo-registro" required />
+            
+                <label class="palabra-label" for="email-registro">Email</label>
+                <input type="email" id="email-registro" required />
+            
+                <label class="palabra-label" for="telefono-registro">Teléfono</label>
+                <input type="tel" id="telefono-registro" required />
+            
+                <button type="submit">Registrar</button>
+            </form>
+            <div class="inico-redes-sociales">
+                <p class="palabra">O inicia sesión con:</p>
+                <button class="social-button" id="google">
+                    <img src="../imagenes/logos/logo-google.webp" alt="Iniciar sesión con Google">
+                    Google
+                </button>
+                <button class="social-button" id="instagram">
+                    <img src="../imagenes/logos/logo-instagram.avif" alt="Iniciar sesión con Instagram">
+                    Instagram
+                </button>
+            </div>
+            <div id="resultado"></div> <!-- Aquí se mostrará el resultado -->
+
+            <script type="module" src="../js.js"></script>
+            <script src="../js/Cursor.js"></script>
+            <script type="module" src="../js/Cliente.js"></script>
+            <script type="module" src="../app.js"></script>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background-image: url("../imagenes/posible_fondo.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: none;
+    /* Oculta el cursor del sistema */
+    position: relative;
+}
+
+.click-cursor {
+    position: absolute;
+    width: 32px;
+    /* Ancho del cursor */
+    height: 32px;
+    /* Alto del cursor */
+    background-image: url("../imagenes/cursor/correjido-puntero.cur");
+    /* Cursor personalizado */
+    background-size: cover;
+    pointer-events: none;
+    /* Ignorar eventos en este elemento */
+    z-index: 1000;
+    /* Asegúrate de que esté en la parte superior */
+}
+
+body {
+    background-color: rgb(2, 14, 27);
+    cursor: none;
+    /* Oculta el cursor del sistema */
+
+}
+
+#contenedor-titulo {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+    padding-top: 0;
+    background-color: rgb(35, 29, 28);
+
+}
+
+#titulo {
+    margin-top: 0;
+    margin-left: 40%;
+    padding: 2%;
+    color: rgb(223, 199, 17);
+}
+
+#barra-lateral {
+    margin-top: 0;
+    width: 200px;
+    height: 60%;
+    background-image: url("../imagenes/poste-barber-retocado.png");
+    background-size: cover;
+    color: rgb(225, 243, 104);
+    padding: 20px;
+    position: absolute;
+    left: -220px;
+    transition: left 0.3s;
+    cursor: none;
+    /* Oculta el cursor del sistema */
+
+}
+
+#barra-lateral:hover {
+    left: 0;
+    cursor: none;
+    /* Oculta el cursor del sistema */
+
+}
+
+#barra-lateral ul {
+    list-style-type: none;
+    /* Elimina los puntos de la lista */
+    padding-left: 0;
+    /* Elimina el padding extra */
+}
+
+.lista {
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: none;
+    /* Oculta el cursor del sistema */
+
+}
+
+.lista:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* Fondo semitransparente */
+    transform: scale(1.05);
+    /* Efecto de ampliación */
+    cursor: none;
+    /* Oculta el cursor del sistema */
+
+}
+
+
+#reserva,
+#regsitrarse-boton,
+#mostrar-precios {
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Fondo transparente oscuro */
+    color: rgb(211, 198, 14);
+    /* Texto blanco */
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    /* Borde blanco y translúcido */
+    cursor: none;
+    /* Oculta el cursor del sistema */
+
+}
+
+#reserva:hover,
+#regsitrarse-boton:hover,
+#mostrar-precios:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Fondo semitransparente claro al pasar el mouse */
+    cursor: none;
+    /* Oculta el cursor del sistema */
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/reserva.css">
+  <title>Reserva</title>
+</head>
+
+<body>
+
+  <!-- Botón de ir al inicio -->
+  <a href="./index.html" class="boton-inicio">Inicio</a>
+
+  <div class="tarjeta-reserva">
+    <h2>Reserva tu turno</h2>
+    <form id="reserva-formulario">
+      <label for="nombre-completo-reserva">Nombre Completo</label>
+      <input type="text" id="nombre-completo-reserva" required />
+  
+      <label for="email-reserva">Email</label>
+      <input type="email" id="email-reserva" required />
+  
+      <label for="telefono-reserva">Teléfono</label>
+      <input type="tel" id="telefono-reserva" required />
+  
+      <label for="date">Fecha de Reserva</label>
+      <input type="date" id="date" required />
+  
+      <label for="time">Hora de Reserva</label>
+      <select id="time" required>
+          <option value="">Selecciona una hora</option>
+          <option value="09:00">09:00 AM</option>
+          <option value="10:00">10:00 AM</option>
+          <option value="11:00">11:00 AM</option>
+          <option value="12:00">12:00 PM</option>
+          <option value="13:00">1:00 PM</option>
+          <option value="14:00">2:00 PM</option>
+          <option value="15:00">3:00 PM</option>
+          <option value="16:00">4:00 PM</option>
+          <option value="17:00">5:00 PM</option>
+          <option value="18:00">6:00 PM</option>
+          <option value="19:00">7:00 PM</option>
+      </select>
+  
+      <button type="submit">Confirmar</button>
+  </form>
+  </div>
+
+  <!-- Div para mostrar el resultado del proceso -->
+  <div id="resultado"></div>
+
+  <script type="module" src="../guarda-reserva.js"></script>
+
+</body>
+
+</html>

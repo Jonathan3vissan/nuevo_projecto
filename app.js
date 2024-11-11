@@ -1,30 +1,29 @@
+// app.js
+
+import Reserva from "./clases/Reserva.js";
+import Cliente from "./clases/Cliente.js";
+import GestorDeDatos from "./clases/GestorDeDato.js";
+
 document.addEventListener("DOMContentLoaded", () => {
-    // Verifica si el formulario de reserva está presente
     const formularioReserva = document.getElementById("reserva-formulario");
     const formularioRegistro = document.getElementById("formulario-registro");
 
+    // Lógica para manejar el formulario de reserva
     if (formularioReserva) {
-        // Si el formulario de reserva está presente, ejecutamos la lógica para reserva
         formularioReserva.addEventListener("submit", function (evento) {
             evento.preventDefault();
 
             const nombreRecibido = document.getElementById("nombre-completo-reserva").value;
             const mailRecibido = document.getElementById("email-reserva").value;
             const telefonoRecibido = document.getElementById("telefono-reserva").value;
-            const fechaRecibida = document.getElementById("date").value;
-            const horaRecibida = document.getElementById("time").value;
+            const fechaRecibida = document.getElementById("fecha-reserva").value;
+            const horaRecibida = document.getElementById("hora-reserva").value;
 
-            const datosReserva = {
-                nombre: nombreRecibido,
-                email: mailRecibido,
-                telefono: telefonoRecibido,
-                fecha: fechaRecibida,
-                hora: horaRecibida
-            };
+            // Crear la instancia de Reserva con los datos recibidos
+            const reserva = new Reserva(nombreRecibido, mailRecibido, telefonoRecibido, fechaRecibida, horaRecibida);
 
-            let reservas = JSON.parse(localStorage.getItem("Reservas")) || [];
-            reservas.push(datosReserva);
-            localStorage.setItem("Reservas", JSON.stringify(reservas));
+            // Llamamos al método para guardar la reserva en localStorage
+            reserva.tomarDatosDelDOM();  // Esto asegura que los datos se guardan en localStorage
 
             const resultadoDiv = document.getElementById('resultado');
             resultadoDiv.classList.remove('success', 'error', 'show');
@@ -42,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Lógica para manejar el formulario de registro
     if (formularioRegistro) {
-        // Si el formulario de registro está presente, ejecutamos la lógica para registro
         formularioRegistro.addEventListener("submit", function (evento) {
             evento.preventDefault();
 
@@ -51,29 +50,28 @@ document.addEventListener("DOMContentLoaded", () => {
             const mailRecibido = document.getElementById("email-registro").value;
             const telefonoRecibido = document.getElementById("telefono-registro").value;
 
-            const datosCliente = {
-                nombre: nombreRecibido,
-                email: mailRecibido,
-                telefono: telefonoRecibido
-            };
+            const cliente = new Cliente(nombreRecibido, mailRecibido, telefonoRecibido);
 
-            let clientes = JSON.parse(localStorage.getItem("Registro-cliente")) || [];
-            clientes.push(datosCliente);
-            localStorage.setItem("Registro-cliente", JSON.stringify(clientes));
+            cliente.enviarDatos().then((datosCliente) => {
+                const gestorDeDatos = new GestorDeDatos();
+                gestorDeDatos.guardarCliente(datosCliente);  // Guardamos el cliente
 
-            const resultadoDiv = document.getElementById('resultado');
-            resultadoDiv.classList.remove('success', 'error', 'show');
-            resultadoDiv.innerText = "Procesando registro...";
-            resultadoDiv.classList.add('show');
+                const resultadoDiv = document.getElementById('resultado');
+                resultadoDiv.classList.remove('success', 'error', 'show');
+                resultadoDiv.innerText = "Procesando registro...";
+                resultadoDiv.classList.add('show');
 
-            try {
-                resultadoDiv.innerText = "Registro realizado con éxito.";
-                resultadoDiv.classList.add('success');
-            } catch (error) {
-                console.error("Error al registrar cliente:", error);
-                resultadoDiv.innerText = "Ocurrió un error al procesar el registro.";
-                resultadoDiv.classList.add('error');
-            }
+                try {
+                    resultadoDiv.innerText = "Registro realizado con éxito.";
+                    resultadoDiv.classList.add('success');
+                } catch (error) {
+                    console.error("Error al registrar cliente:", error);
+                    resultadoDiv.innerText = "Ocurrió un error al procesar el registro.";
+                    resultadoDiv.classList.add('error');
+                }
+            }).catch(error => {
+                console.error("Error al generar el ID del cliente:", error);
+            });
         });
     }
 });

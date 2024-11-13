@@ -26,23 +26,23 @@ document.addEventListener('DOMContentLoaded', function () {
             const fila = document.createElement("tr");
 
             const nombreTd = document.createElement("td");
-            nombreTd.textContent = reserva.nombre;
+            nombreTd.textContent = reserva.getNombre();
             fila.appendChild(nombreTd);
 
             const emailTd = document.createElement("td");
-            emailTd.textContent = reserva.email;
+            emailTd.textContent = reserva.getMail();
             fila.appendChild(emailTd);
 
             const telefonoTd = document.createElement("td");
-            telefonoTd.textContent = reserva.telefono;
+            telefonoTd.textContent = reserva.getTelefono();
             fila.appendChild(telefonoTd);
 
             const fechaTd = document.createElement("td");
-            fechaTd.textContent = reserva.fecha;
+            fechaTd.textContent = reserva.getFecha();
             fila.appendChild(fechaTd);
 
             const horaTd = document.createElement("td");
-            horaTd.textContent = reserva.hora;
+            horaTd.textContent = reserva.getHora();
             fila.appendChild(horaTd);
 
             const accionesTd = document.createElement("td");

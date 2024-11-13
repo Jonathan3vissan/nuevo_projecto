@@ -82,19 +82,19 @@ class GestorDeDatos {
 
     /**
      * Elimina una reserva del localStorage.
-     * @param {number} index - El índice de la reserva a eliminar.
+     * @param {number} indice - El índice de la reserva a eliminar.
      */
-    eliminarReserva(index) {
+    eliminarReserva(indice) {
         let reservas = JSON.parse(localStorage.getItem("Reservas")) || [];
 
-        // Verificamos si el índice es válido
-        if (index < 0 || index >= reservas.length) {
+     /*    // Verificamos si el índice es válido
+        if (indice < 0 || indice >= reservas.length) {
             console.error("Índice de reserva no válido.");
             return;
-        }
+        } */
 
         // Eliminamos la reserva del array
-        reservas.splice(index, 1);
+        reservas.splice(indice, 1);
 
         // Guardamos el array actualizado de reservas en localStorage
         localStorage.setItem("Reservas", JSON.stringify(reservas));

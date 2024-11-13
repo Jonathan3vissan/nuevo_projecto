@@ -29,8 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             gestor.guardarReserva(reserva)
-            // Llamamos al método para guardar la reserva en localStorage
-            // reserva.tomarDatosDelDOM();  // Esto asegura que los datos se guardan en localStorage
 
             const resultadoDiv = document.getElementById('resultado');
             resultadoDiv.classList.remove('success', 'error', 'show');

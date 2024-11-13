@@ -80,7 +80,7 @@ class Reserva extends Cliente {
      * Elimina la reserva actual de la lista de reservas
      * @param {number} index - Índice de la reserva a eliminar
      */
-    static eliminarReserva(index) {
+     eliminarReserva(index) {
         // Obtiene las reservas almacenadas
         let reservas = GestorDeDatos.obtenerReservas();
         

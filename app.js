@@ -4,6 +4,8 @@ import Reserva from "./clases/Reserva.js";
 import Cliente from "./clases/Cliente.js";
 import GestorDeDatos from "./clases/GestorDeDato.js";
 
+const gestor = new GestorDeDatos();
+
 document.addEventListener("DOMContentLoaded", () => {
     const formularioReserva = document.getElementById("reserva-formulario");
     const formularioRegistro = document.getElementById("formulario-registro");
@@ -21,9 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Crear la instancia de Reserva con los datos recibidos
             const reserva = new Reserva(nombreRecibido, mailRecibido, telefonoRecibido, fechaRecibida, horaRecibida);
+            console.log("envinado de Reservaa gestor datos esta reserva que es ", typeof reserva);
+            console.log("vero si nombreme muestra en Reserca con get ", reserva.getNombre);
 
+
+
+            gestor.guardarReserva(reserva)
             // Llamamos al método para guardar la reserva en localStorage
-            reserva.tomarDatosDelDOM();  // Esto asegura que los datos se guardan en localStorage
+            // reserva.tomarDatosDelDOM();  // Esto asegura que los datos se guardan en localStorage
 
             const resultadoDiv = document.getElementById('resultado');
             resultadoDiv.classList.remove('success', 'error', 'show');

@@ -12,7 +12,7 @@ class GestorDeDatos {
     guardarCliente(cliente) {
         let clientes = JSON.parse(localStorage.getItem("Registro-cliente")) || [];
         clientes.push(cliente);
-        localStorage.setItem("Registro-cliente", JSON.stringify(clientes));  
+        localStorage.setItem("Registro-cliente", JSON.stringify(clientes));
     }
 
     /**
@@ -23,24 +23,18 @@ class GestorDeDatos {
      * @param {Object} reservarecibida - El objeto reserva que se va a guardar.
      */
     guardarReserva(reservarecibida) {
-        // Verificamos que la reserva sea válida
-        if (!(reservarecibida instanceof Reserva)) {
-            console.error("El objeto recibido no es una instancia de Reserva.");
-            return;
-        }
-
-        // Convertimos la reserva en un objeto simple con sus datos
         const reservaData = {
-            nombre: reservarecibida.nombre,
-            mail: reservarecibida.mail,
-            telefono: reservarecibida.telefono,
-            fecha: reservarecibida.fecha,
-            hora: reservarecibida.hora,
+            nombre: reservarecibida.getNombre(),
+            mail: reservarecibida.getMail(),
+            telefono: reservarecibida.getTelefono(),
+            fecha: reservarecibida.getFecha(),
+            hora: reservarecibida.getHora(),
         };
+        console.log("salida del resetvadataa ", reservaData);
 
         // Recuperamos las reservas existentes, si las hay
         let reservas = JSON.parse(localStorage.getItem("Reservas")) || [];
-        
+
         // Añadimos la nueva reserva
         reservas.push(reservaData);
 
@@ -92,7 +86,7 @@ class GestorDeDatos {
      */
     eliminarReserva(index) {
         let reservas = JSON.parse(localStorage.getItem("Reservas")) || [];
-        
+
         // Verificamos si el índice es válido
         if (index < 0 || index >= reservas.length) {
             console.error("Índice de reserva no válido.");
@@ -113,7 +107,7 @@ class GestorDeDatos {
      */
     modificarReserva(index, nuevaReserva) {
         let reservas = JSON.parse(localStorage.getItem("Reservas")) || [];
-        
+
         // Verificamos si el índice es válido
         if (index < 0 || index >= reservas.length) {
             console.error("Índice de reserva no válido.");

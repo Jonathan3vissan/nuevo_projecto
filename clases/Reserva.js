@@ -79,16 +79,25 @@ class Reserva extends Cliente {
     /**
      * Elimina la reserva actual de la lista de reservas
      * @param {number} index - Índice de la reserva a eliminar
+     * @param {Function} mostrarReservas - Función para actualizar la vista
      */
-     eliminarReserva(index) {
-        // Obtiene las reservas almacenadas
-        let reservas = GestorDeDatos.obtenerReservas();
-        
-        // Elimina la reserva en la posición indicada
+    eliminarReserva(index, mostrarReservas) {
+        let reservas = this.#gestorDeDatos.obtenerReserva();
+
+        // Verificamos si el índice es válido
+        if (index < 0 || index >= reservas.length) {
+            console.error("Índice de reserva no válido.");
+            return;
+        }
+
+        // Eliminamos la reserva del array
         reservas.splice(index, 1);
-        
-        // Vuelve a guardar las reservas actualizadas
-        GestorDeDatos.guardarReservas(reservas);
+
+        // Guardamos el array actualizado de reservas en localStorage
+        this.#gestorDeDatos.guardarReservaDespuesDeElimanar(reservas);
+
+        // Actualizar la tabla después de eliminar la reserva
+        mostrarReservas();
     }
 
     /**
@@ -96,10 +105,15 @@ class Reserva extends Cliente {
      * @param {number} index - Índice de la reserva a modificar
      */
     static editarReserva(index) {
-        // Obtiene las reservas almacenadas
-        let reservas = GestorDeDatos.obtenerReservas();
-        
-        // Obtiene la reserva a modificar
+        // Usamos la instancia de gestorDeDatos que ya existe
+        const reservas = GestorDeDatos.obtenerReserva();  // Usar la instancia ya creada
+
+        // Verificamos si el índice es válido
+        if (index < 0 || index >= reservas.length) {
+            console.error("Índice de reserva no válido.");
+            return;
+        }
+
         const reserva = reservas[index];
 
         // Solicitar nueva fecha y hora para la reserva
@@ -115,9 +129,28 @@ class Reserva extends Cliente {
             reservas[index] = reserva;
 
             // Guarda las reservas actualizadas
-            GestorDeDatos.guardarReservas(reservas);
+            gestorDeDatos.guardarReservaDespuesDeElimanar(reservas);  // Usamos el gestorDeDatos que ya existe
+
+            // Actualiza la tabla después de modificar la reserva
+            mostrarReservas();
         }
     }
+
+    /**
+     * Convierte la instancia de la reserva en un objeto plano
+     * @returns {Object} Un objeto con las propiedades necesarias de la reserva
+     */
+    toPlainObject() {
+        return {
+            nombre: this.getNombre(),
+            mail: this.getMail(),
+            telefono: this.getTelefono(),
+            fecha: this.#fecha,
+            hora: this.#hora,
+        };
+    }
+
+    // Otros métodos de la clase...
 }
 
 export default Reserva;

@@ -1,24 +1,24 @@
 import GestorDeDatos from "./clases/GestorDeDato.js";
+import Reserva from "./clases/Reserva.js";
 
 document.addEventListener('DOMContentLoaded', function () {
     const gestorDeDatos = new GestorDeDatos();
     const cuerpoTabla = document.getElementById("cuerpo-tabla");
 
+    /**
+     * Muestra las reservas almacenadas en la tabla del DOM.
+     */
     function mostrarReservas() {
         cuerpoTabla.innerHTML = ''; // Limpiar la tabla
 
         // Obtener las reservas
         const reservas = gestorDeDatos.obtenerReserva();
 
-        // Verificar si reservas es un array válido
-        if (!Array.isArray(reservas)) {
-            console.error("Las reservas no son un array válido.");
-            cuerpoTabla.innerHTML = '<tr><td colspan="6">No hay reservas disponibles.</td></tr>';
-            return;
-        }
+        // Verificar que las reservas no estén vacías
+        console.log("Reservas obtenidas:", reservas);
 
         if (reservas.length === 0) {
-            cuerpoTabla.innerHTML = '<tr><td colspan="6">No hay reservas disponibles.</td></tr>';
+            cuerpoTabla.innerHTML = '<tr><td colspan="6">No hay reservas.</td></tr>';
             return;
         }
 
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
             eliminarBtn.textContent = "Eliminar";
             eliminarBtn.classList.add("boton");
             eliminarBtn.onclick = function () {
-                eliminarReserva(index);
+                reserva.eliminarReserva(index, mostrarReservas); // Pasamos mostrarReservas para actualizar la tabla
             };
             accionesTd.appendChild(eliminarBtn);
 
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             modificarBtn.textContent = "Modificar";
             modificarBtn.classList.add("boton");
             modificarBtn.onclick = function () {
-                modificarReserva(index);
+                Reserva.editarReserva(index);
             };
             accionesTd.appendChild(modificarBtn);
 
@@ -68,5 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Mostrar las reservas al cargar la página
     mostrarReservas();
 });

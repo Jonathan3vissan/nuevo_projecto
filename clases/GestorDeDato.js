@@ -1,4 +1,4 @@
-import Reserva from "../clases/Reserva.js";
+import Reserva from "./Reserva.js";
 
 class GestorDeDatos {
 
@@ -23,32 +23,49 @@ class GestorDeDatos {
      * @param {Object} reservarecibida - El objeto reserva que se va a guardar.
      */
     guardarReserva(reservarecibida) {
-        const reservaData = {
-            nombre: reservarecibida.getNombre(),
-            mail: reservarecibida.getMail(),
-            telefono: reservarecibida.getTelefono(),
-            fecha: reservarecibida.getFecha(),
-            hora: reservarecibida.getHora(),
-        };
-        console.log("salida del resetvadataa ", reservaData);
-
-        // Recuperamos las reservas existentes, si las hay
+        const reservaData = reservarecibida.toPlainObject();
+        console.log("Reserva a guardar:", reservaData);  // Verificar datos antes de guardar
         let reservas = JSON.parse(localStorage.getItem("Reservas")) || [];
-
-        // Añadimos la nueva reserva
         reservas.push(reservaData);
-
-        // Guardamos el array actualizado de reservas en localStorage
+        console.log("antess de enviar a setItem",reservas);
+        
         localStorage.setItem("Reservas", JSON.stringify(reservas));
     }
+    
 
     /**
-     * Recupera los clientes almacenados en el localStorage.
-     * Si no existen clientes almacenados, retorna un array vacío.
-     * @returns {Array} Array de objetos cliente.
+     * Guarda el array de reservas actualizado después de eliminar una reserva
+     * @param {Array} reservarecibida - El array actualizado de reservas
      */
-    obtenerClientes() {
-        return JSON.parse(localStorage.getItem("Registro-cliente")) || [];
+    guardarReservaDespuesDeElimanar(reservarecibida) {
+        console.log("Guardando las reservas actualizadas después de eliminar una reserva");
+    
+        // Verificar si la estructura de los datos es correcta
+        console.log(reservarecibida);
+    
+        // Guardamos el array actualizado de reservas en localStorage
+        try {
+            if (Array.isArray(reservarecibida)) {
+                // Convertir las reservas de vuelta a objetos de la clase Reserva antes de guardarlas
+                const reservas = reservarecibida.map(reservaData => {
+                    return new Reserva(
+                        reservaData.nombre,
+                        reservaData.mail,
+                        reservaData.telefono,
+                        reservaData.fecha,
+                        reservaData.hora
+                    );
+                });
+
+                // Guardamos el array de objetos de tipo Reserva
+                localStorage.setItem("Reservas", JSON.stringify(reservas));
+                console.log("Las reservas se guardaron correctamente.");
+            } else {
+                console.error("No es un array válido para guardar.");
+            }
+        } catch (error) {
+            console.error("Error al guardar en localStorage:", error);
+        }
     }
 
     /**
@@ -57,16 +74,14 @@ class GestorDeDatos {
      * @returns {Array} Array de objetos reserva.
      */
     obtenerReserva() {
-        // Recuperamos el array de reservas almacenadas en el localStorage
         const reservasGuardadas = JSON.parse(localStorage.getItem("Reservas"));
 
-        // Verificamos si reservasGuardadas es un array, si no es un array, lo convertimos a uno vacío
         if (!Array.isArray(reservasGuardadas)) {
             console.error("Las reservas no son un array válido.");
             return [];
         }
 
-        // Convertimos cada objeto JSON en una instancia de la clase Reserva
+        // Convertimos los objetos planos de vuelta a instancias de la clase Reserva
         return reservasGuardadas.map(reservaData => {
             const reserva = new Reserva(
                 reservaData.nombre,
@@ -75,50 +90,28 @@ class GestorDeDatos {
                 reservaData.fecha,
                 reservaData.hora
             );
-            // Aquí se podría añadir más lógica si es necesario, como validaciones o manipulación adicional
             return reserva;
         });
     }
 
     /**
      * Elimina una reserva del localStorage.
-     * @param {number} indice - El índice de la reserva a eliminar.
+     * @param {number} indice - El índice de la reserva que se desea eliminar.
      */
     eliminarReserva(indice) {
-        let reservas = JSON.parse(localStorage.getItem("Reservas")) || [];
+        let reservas = JSON.parse(localStorage.getItem("Reservas"));
 
-     /*    // Verificamos si el índice es válido
-        if (indice < 0 || indice >= reservas.length) {
-            console.error("Índice de reserva no válido.");
-            return;
-        } */
+        // Verificamos que el índice sea válido
+        if (reservas && reservas.length > 0 && indice >= 0 && indice < reservas.length) {
+            // Eliminamos la reserva en el índice especificado
+            reservas.splice(indice, 1);
 
-        // Eliminamos la reserva del array
-        reservas.splice(indice, 1);
-
-        // Guardamos el array actualizado de reservas en localStorage
-        localStorage.setItem("Reservas", JSON.stringify(reservas));
-    }
-
-    /**
-     * Modifica una reserva en el localStorage.
-     * @param {number} index - El índice de la reserva a modificar.
-     * @param {Object} nuevaReserva - El objeto de reserva con los nuevos datos.
-     */
-    modificarReserva(index, nuevaReserva) {
-        let reservas = JSON.parse(localStorage.getItem("Reservas")) || [];
-
-        // Verificamos si el índice es válido
-        if (index < 0 || index >= reservas.length) {
-            console.error("Índice de reserva no válido.");
-            return;
+            // Guardamos el array de reservas actualizado
+            localStorage.setItem("Reservas", JSON.stringify(reservas));
+            console.log(`Reserva en el índice ${indice} eliminada correctamente.`);
+        } else {
+            console.error("Índice no válido para eliminar la reserva.");
         }
-
-        // Modificamos la reserva en el array
-        reservas[index] = nuevaReserva;
-
-        // Guardamos el array actualizado de reservas en localStorage
-        localStorage.setItem("Reservas", JSON.stringify(reservas));
     }
 }
 

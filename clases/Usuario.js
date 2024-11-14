@@ -2,6 +2,12 @@ class Usuario {
     #nombre = "def nombre";  
     #mail = "def mail";      
     #telefono = "def telefono";  
+    /**
+     * inicializa las propiedades
+     * @param {String} nombre del usuario
+     * @param {String} mail del usuario
+     * @param {String} telefono del usuario
+     */
     constructor(nombre = 'def nombre Usuario', mail = 'def mail Usuario', telefono = 'def Telefono Usuario') {
         this.#nombre = nombre;
         this.#mail = mail;

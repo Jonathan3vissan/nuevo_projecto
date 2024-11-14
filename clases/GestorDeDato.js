@@ -27,11 +27,11 @@ class GestorDeDatos {
         console.log("Reserva a guardar:", reservaData);  // Verificar datos antes de guardar
         let reservas = JSON.parse(localStorage.getItem("Reservas")) || [];
         reservas.push(reservaData);
-        console.log("antess de enviar a setItem",reservas);
-        
+        console.log("antess de enviar a setItem", reservas);
+
         localStorage.setItem("Reservas", JSON.stringify(reservas));
     }
-    
+
 
     /**
      * Guarda el array de reservas actualizado después de eliminar una reserva
@@ -39,23 +39,18 @@ class GestorDeDatos {
      */
     guardarReservaDespuesDeElimanar(reservarecibida) {
         console.log("Guardando las reservas actualizadas después de eliminar una reserva");
-    
         // Verificar si la estructura de los datos es correcta
         console.log(reservarecibida);
-    
         // Guardamos el array actualizado de reservas en localStorage
         try {
             if (Array.isArray(reservarecibida)) {
                 // Convertir las reservas de vuelta a objetos de la clase Reserva antes de guardarlas
+
                 const reservas = reservarecibida.map(reservaData => {
-                    return new Reserva(
-                        reservaData.nombre,
-                        reservaData.mail,
-                        reservaData.telefono,
-                        reservaData.fecha,
-                        reservaData.hora
-                    );
+                    return reservaData.toPlainObject();
+
                 });
+                console.log(reservas);
 
                 // Guardamos el array de objetos de tipo Reserva
                 localStorage.setItem("Reservas", JSON.stringify(reservas));
@@ -81,7 +76,6 @@ class GestorDeDatos {
             return [];
         }
 
-        // Convertimos los objetos planos de vuelta a instancias de la clase Reserva
         return reservasGuardadas.map(reservaData => {
             const reserva = new Reserva(
                 reservaData.nombre,

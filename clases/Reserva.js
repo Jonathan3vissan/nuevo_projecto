@@ -49,17 +49,12 @@ class Reserva extends Cliente {
     tomarDatosDelDOM() {
         const fechaInput = document.getElementById("fecha-reserva").value;
         const horaInput = document.getElementById("hora-reserva").value;
-
         if (!fechaInput || !horaInput) {
             alert("Debe seleccionar una fecha y hora.");
             return;
         }
-
-        // Establece la fecha y la hora en la instancia
         this.establecerFecha(fechaInput);
         this.establecerHora(horaInput);
-
-        // Guarda la reserva en localStorage
         this.#gestorDeDatos.guardarReserva(this);
     }
 

@@ -2,7 +2,7 @@ class Usuario {
     #nombre = "def nombre";  
     #mail = "def mail";      
     #telefono = "def telefono";  
-    constructor(nombre = 'def nombre Usuario', mail = 'def mail Usuario', telefono = 'def TelefonoUsuario') {
+    constructor(nombre = 'def nombre Usuario', mail = 'def mail Usuario', telefono = 'def Telefono Usuario') {
         this.#nombre = nombre;
         this.#mail = mail;
         this.#telefono = telefono;

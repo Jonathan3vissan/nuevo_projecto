@@ -36,7 +36,9 @@ class GestorDeDatos {
                     return reservaData.toPlainObject();
                 });
                 localStorage.setItem("Reservas", JSON.stringify(reservas));
-                console.log("Las reservas se guardaron correctamente.");
+                console.log("Las reservas se guardaron correctamente.")
+                console.log("muestra la reserva guardad L40",reservas);
+                ;
             } else {
                 console.error("No es un array válido para guardar.");
             }

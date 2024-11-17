@@ -72,16 +72,16 @@ class Reserva extends Cliente {
     }
     /**
      * Elimina la reserva actual de la lista de reservas
-     * @param {number} index - Índice de la reserva a eliminar
+     * @param {number} indice - Índice de la reserva a eliminar
      * @param {Function} mostrarReservas - Función para actualizar la vista
      */
-    eliminarReserva(index, mostrarReservas) {
+    eliminarReserva(indice, mostrarReservas) {
         let reservas = this.#gestorDeDatos.obtenerReserva();
-        if (index < 0 || index >= reservas.length) {
+        if (indice < 0 || indice >= reservas.length) {
             console.error("Índice de reserva no válido.");
             return;
         }
-        reservas.splice(index, 1);
+        reservas.splice(indice, 1);
         this.#gestorDeDatos.guardarReservaDespuesDeElimanar(reservas);
         mostrarReservas();
     }
@@ -89,8 +89,8 @@ class Reserva extends Cliente {
      * Modifica la fecha y/o hora de la reserva
      * @param {number} index - Índice de la reserva a modificar
      */
-    static editarReserva(index) {
-        const reservas = GestorDeDatos.obtenerReserva();
+    editarReserva(index,mostrarReservas) {
+        const reservas = this.#gestorDeDatos.obtenerReserva();
         if (index < 0 || index >= reservas.length) {
             console.error("Índice de reserva no válido.");
             return;
@@ -102,8 +102,8 @@ class Reserva extends Cliente {
             reserva.establecerFecha(nuevaFecha);
             reserva.establecerHora(nuevaHora);
             reservas[index] = reserva;
-            gestorDeDatos.guardarReservaDespuesDeElimanar(reservas);
-            mostrarReservas();
+            this.#gestorDeDatos.guardarReservaDespuesDeElimanar(reservas);
+            mostrarReservas()
         }
     }
     /**
